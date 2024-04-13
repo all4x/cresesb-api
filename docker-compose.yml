@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    command: "npm run start"
+    working_dir: /home/app
+    expose:
+      - "3003"
+    ports:
+      - "3003:3003"
