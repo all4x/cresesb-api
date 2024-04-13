@@ -1,6 +1,7 @@
+# Usa a imagem base do node especificada
 FROM node:20@sha256:cb7cd40ba6483f37f791e1aace576df449fc5f75332c19ff59e2c6064797160e
 
-
+# Instalação do Chrome e configurações
 RUN apt-get update \
   && apt-get install -y wget gnupg \
   && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/googlechrome-linux-keyring.gpg \
@@ -12,31 +13,32 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && groupadd -r app && useradd -rm -g app -G audio,video app
 
-
+# Define o usuário de trabalho
 USER app
 
+# Define o diretório de trabalho
 WORKDIR /home/app
 
-# Copy package.json and package-lock.json
+# Copia package.json e package-lock.json
 COPY package*.json ./
 
-# Install dependencies
+# Instala as dependências
 RUN npm install
 
-# Copy source code
+# Copia o código-fonte
 COPY ./src/ ./src/
 
-# Build the project
+# Compila o projeto
 RUN npm run build
 
-# Change ownership of the directory
+# Altera a propriedade do diretório
 USER root
 RUN chown -R app:app /home/app \
   && chmod -R 777 /home/app
 
-USER app
-
-# Expose port
+# Define a porta a ser exposta
 EXPOSE 3003
 
+# Comando padrão para iniciar o servidor
 CMD ["node", "/home/app/dist/server.js"]
+
