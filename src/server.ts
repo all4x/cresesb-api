@@ -27,4 +27,4 @@ fastify.get("/", async function handler() {
   return { msg: "Pong" };
 });
 
-fastify.listen({ port: 3003 }, () => console.log("Server is ready!"));
+fastify.listen({ port: 3005 }, () => console.log("Server is ready!"));

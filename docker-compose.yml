@@ -1,4 +1,3 @@
-
 version: "3.8"
 
 services:
@@ -12,4 +11,4 @@ services:
     expose:
       - "3003"
     ports:
-      - "3003:3003"
+      - "3005:3003"
