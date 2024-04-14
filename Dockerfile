@@ -37,7 +37,7 @@ RUN chown -R app:app /home/app \
   && chmod -R 777 /home/app
 
 # Define a porta a ser exposta
-EXPOSE 3005
+EXPOSE 3003
 
 # Comando padrão para iniciar o servidor
 CMD ["node", "/home/app/dist/server.js"]

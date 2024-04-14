@@ -6,6 +6,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const PORT = process.env.PORT || 3003;
+const HOST = process.env.HOST || "0.0.0.0";
+
 const fastify = Fastify({ logger: true });
 
 const querySchemaZod = z.object({
@@ -31,6 +33,6 @@ fastify.get("/", async function handler() {
   return { msg: "Pong" };
 });
 
-fastify.listen({ port: PORT }, () =>
+fastify.listen({ port: PORT, host: HOST }, () =>
   console.log(`Server is ready! Listening on port ${PORT}`),
 );
