@@ -1,7 +1,11 @@
 import Fastify from "fastify";
 import { main } from "./puppeteer";
 import { z } from "zod";
+import dotenv from "dotenv";
 
+dotenv.config();
+
+const PORT = process.env.PORT || 3003;
 const fastify = Fastify({ logger: true });
 
 const querySchemaZod = z.object({
@@ -27,4 +31,6 @@ fastify.get("/", async function handler() {
   return { msg: "Pong" };
 });
 
-fastify.listen({ port: 3005 }, () => console.log("Server is ready!"));
+fastify.listen({ port: PORT }, () =>
+  console.log(`Server is ready! Listening on port ${PORT}`),
+);
